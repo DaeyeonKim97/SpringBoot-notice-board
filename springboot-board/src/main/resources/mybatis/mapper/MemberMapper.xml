@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootboard.member.dao.MemberMapper">
+
+    <select id="selectMemberById" resultType="string">
+        SELECT
+            A.MEMBER_ID
+        FROM TBL_MEMBER A
+        WHERE A.MEMBER_STATUS = 'Y'
+          AND A.MEMBER_ID = #{ memberId }
+    </select>
+
+    <select id="findByMemberId" resultType="MemberDTO">
+        SELECT
+            A.MEMBER_NO
+             , A.MEMBER_ID
+             , A.MEMBER_PWD
+             , A.NICKNAME
+             , A.PHONE
+             , A.EMAIL
+             , A.ADDRESS
+             , A.ENROLL_DATE
+             , A.MEMBER_ROLE
+             , A.MEMBER_STATUS
+        FROM TBL_MEMBER A
+        WHERE A.MEMBER_STATUS = 'Y'
+          AND A.MEMBER_ID = #{ memberId }
+    </select>
+
+
+    <insert id="insertMember" parameterType="MemberDTO">
+        INSERT
+        INTO TBL_MEMBER A
+            (
+          A.MEMBER_NO
+        , A.MEMBER_ID
+        , A.MEMBER_PWD
+        , A.NICKNAME
+        , A.PHONE
+        , A.EMAIL
+        , A.ADDRESS
+        )
+        VALUES
+            (
+            SEQ_MEMBER_NO.NEXTVAL
+                , #{ memberId }
+                , #{ memberPwd }
+                , #{ nickname }
+                , #{ phone }
+                , #{ email }
+                , #{ address }
+            )
+    </insert>
+
+    <select id="selectEncryptedPwd" resultType="string">
+        SELECT
+            A.MEMBER_PWD
+        FROM TBL_MEMBER A
+        WHERE A.MEMBER_STATUS = 'Y'
+          AND A.MEMBER_ID = #{ memberId }
+    </select>
+
+    <select id="selectMember" resultType="MemberDTO">
+        SELECT
+            A.MEMBER_NO
+             , A.MEMBER_ID
+             , A.NICKNAME
+             , A.PHONE
+             , A.EMAIL
+             , A.ADDRESS
+             , A.ENROLL_DATE
+             , A.MEMBER_ROLE
+             , A.MEMBER_STATUS
+        FROM  TBL_MEMBER A
+        WHERE  A.MEMBER_STATUS = 'Y'
+          AND  A.MEMBER_ID = #{ memberId }
+    </select>
+
+    <update id="updateMember">
+        UPDATE
+            TBL_MEMBER A
+        SET A.MEMBER_PWD = #{ memberPwd }
+          , A.NICKNAME = #{ nickname }
+          , A.PHONE = #{ phone }
+          , A.EMAIL = #{ email }
+          , A.ADDRESS = #{ address }
+        WHERE A.MEMBER_STATUS = 'Y'
+          AND A.MEMBER_ID = #{ memberId }
+    </update>
+
+    <update id="deleteMember">
+        UPDATE
+            TBL_MEMBER A
+        SET A.MEMBER_STATUS = 'N'
+        WHERE A.MEMBER_STATUS = 'Y'
+          AND A.MEMBER_ID = #{ memberId }
+    </update>
+
+</mapper>
