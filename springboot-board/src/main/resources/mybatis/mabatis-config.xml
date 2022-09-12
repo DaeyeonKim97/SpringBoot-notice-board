@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="callSettersOnNulls" value="true" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="MemberDTO" type="com.example.springbootboard.member.dto.MemberDTO" />
+        <typeAlias alias="BoardDTO" type="com.example.springbootboard.board.dto.BoardDTO" />
+        <typeAlias alias="CategoryDTO" type="com.example.springbootboard.board.dto.CategoryDTO" />
+        <typeAlias alias="ReplyDTO" type="com.example.springbootboard.board.dto.ReplyDTO" />
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="MemberMapper.xml" />
+        <mapper resource="BoardMapper.xml" />
+    </mappers>
+
+</configuration>
