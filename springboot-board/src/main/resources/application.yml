@@ -20,3 +20,9 @@ spring:
   web:
     resources:
       static-locations: classpath:/upload/
+
+mybatis:
+  mapper-locations: mybatis/mapper/*.xml
+  type-aliases-package: com.example.springbootboard
+  configuration:
+    map-underscore-to-camel-case: true
