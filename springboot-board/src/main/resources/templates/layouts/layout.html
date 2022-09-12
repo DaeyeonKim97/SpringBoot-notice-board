@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    window.onload = function() {
+      if(document.getElementById("regist")) {
+        const $regist = document.getElementById("regist");
+        $regist.onclick = function() {
+          location.href = "/member/regist";
+        }
+      }
+
+      if(document.getElementById("duplicationCheck")) {
+
+        const $duplication = document.getElementById("duplicationCheck");
+
+        $duplication.onclick = function() {
+          let memberId = document.getElementById("memberId").value.trim();
+
+          fetch("/member/idDupCheck", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify({memberId: memberId})
+          })
+                  .then(result => result.text())
+                  .then(result => alert(result))
+                  .catch((error) => error.text().then((res) => alert(res)));
+
+        }
+      }
+
+      if(document.getElementById("login")) {
+        const $login = document.getElementById("login");
+        $login.onclick = function() {
+          location.href = "/member/login";
+        }
+      }
+
+      if(document.getElementById("logout")) {
+        const $logout = document.getElementById("logout");
+        $logout.onclick = function() {
+          location.href = "/member/logout";
+        }
+      }
+
+      if(document.getElementById("updateMember")) {
+        const $update = document.getElementById("updateMember");
+        $update.onclick = function() {
+          location.href = "/member/update";
+        }
+      }
+
+      if(document.getElementById("writeNotice")) {
+        const $writeNotice = document.getElementById("writeNotice");
+        $writeNotice.onclick = function() {
+          location.href = "/notice/regist";
+        }
+      }
+
+      if(document.getElementById("writeBoard")) {
+        const $writeBoard = document.getElementById("writeBoard");
+        $writeBoard.onclick = function() {
+          location.href = "/board/regist";
+        }
+      }
+
+      if(document.getElementById("writeThumbnail")) {
+        const $writeThumbnail = document.getElementById("writeThumbnail");
+        $writeThumbnail.onclick = function() {
+          location.href = "/thumbnail/regist";
+        }
+      }
+    }
+  </script>
+</head>
+
+<header th:replace="fragments/header :: headerFragment"></header>
+<div layout:fragment="content"></div>
+
+</html>
